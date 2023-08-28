@@ -30,6 +30,8 @@ console.log('örnek görev:', ilkiniDon(['as','sa'],function(metin){return metin
   Aşağıdaki skor1 ve skor2 kodlarını inceleyiniz ve aşağıdaki soruları altına not alarak cevaplayın
   
   1. skor1 ve skor2 arasındaki fark nedir?
+
+  -iki çıktı da 1 verir fakat skor1 fonksiyonda tanımlı olduğu için fonksiyonda tanımlıdır skor 2 de globalde tanımlıdır farklı yerlerde değişince sorun yaşayabilir. 
   
   2. Hangisi bir closure kullanmaktadır? Nasıl tarif edebilirsin? (yarınki derste öğreneceksin :) )
   
@@ -64,9 +66,10 @@ Aşağıdaki takimSkoru() fonksiyonununda aşağıdakileri yapınız:
 Not: Bu fonskiyon, aşağıdaki diğer görevler için de bir callback fonksiyonu olarak da kullanılacak
 */
 
-function takimSkoru(/*Kodunuzu buraya yazınız*/){
-    /*Kodunuzu buraya yazınız*/
+function takimSkoru(){
+  return  Math.floor(Math.random()*16)+10
 }
+  
 
 
 
@@ -86,14 +89,29 @@ Aşağıdaki macSonucu() fonksiyonununda aşağıdakileri yapınız:
 }
 */ 
 
-function macSonucu(/*Kodunuzu buraya yazınız*/){
-  /*Kodunuzu buraya yazınız*/
+
+
+
+
+function macSonucu(cb, q) {
+  
+
+  let away = 0;
+  let home = 0;
+
+  for (let i = 0; i < q; i++) {
+    away = away + cb();
+    home = home + cb();
+  }
+
+  return {
+    EvSahibi: home,
+    KonukTakim: away,
+  };
 }
 
-
-
-
-
+console.log("G2: Basketbol", macSonucu(takimSkoru, 4));
+console.log("G2: Voleybol", macSonucu(takimSkoru, 3));
 
 /* Zorlayıcı Görev 4: periyotSkoru()
 Aşağıdaki periyotSkoru() fonksiyonununda aşağıdakileri yapınız:
@@ -108,11 +126,17 @@ Aşağıdaki periyotSkoru() fonksiyonununda aşağıdakileri yapınız:
 }
   */
 
+function periyotSkoru(cb) {
+  let home = cb();
+  let away = cb();
 
-function periyotSkoru(/*Kodunuzu buraya yazınız*/) {
-  /*Kodunuzu buraya yazınız*/
-
+  return {
+    EvSahibi: home,
+    KonukTakim: away,
+  };
 }
+
+
 
 
 /* Zorlayıcı Görev 5: skorTabelasi() 
